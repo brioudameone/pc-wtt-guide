@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>日常查询与对照 · wtt</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f7fafc;
+            color: #1e293b;
+            line-height: 1.65;
+            padding: 0 1rem 3rem;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        /* 顶部导航 */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 1rem 0 0.8rem;
+            border-bottom: 1px solid #d1e0ea;
+            margin-bottom: 1.6rem;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #0f766e;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+            padding: 0.5rem 0 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #0f766e;
+            border-bottom-color: #0f766e;
+        }
+
+        /* hero */
+        .hero {
+            margin: 1.8rem 0 2.4rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0b3b3a;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #3f5463;
+            max-width: 680px;
+        }
+
+        /* 卡片网格 —— 三个场景模块 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem 1.3rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(13, 107, 95, 0.08);
+            border: 1px solid #e4edf2;
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 8px 24px rgba(14, 116, 106, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .scene-card .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: #d9eee9;
+            border-radius: 14px;
+            margin-bottom: 0.9rem;
+            font-size: 1.3rem;
+        }
+
+        .scene-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #0f3b37;
+        }
+
+        .scene-card p {
+            color: #3a5663;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .scene-card .meta-hint {
+            font-size: 0.85rem;
+            color: #617b89;
+            border-top: 1px dashed #d5e3ea;
+            padding-top: 0.6rem;
+            margin-top: 0.3rem;
+        }
+
+        /* 常见说明 / 提示块 */
+        .info-block {
+            background: #f0f9f8;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+            margin: 2rem 0 1.8rem;
+            border-left: 5px solid #14a093;
+        }
+
+        .info-block h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0b4b44;
+            margin-bottom: 0.7rem;
+        }
+
+        .info-block p {
+            margin-bottom: 0.6rem;
+            color: #1d4a4a;
+        }
+
+        .faq-summary {
+            margin: 1.6rem 0 0.5rem;
+        }
+
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #d4e6e6;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #0c4c47;
+        }
+
+        .faq-a {
+            color: #2d5b5b;
+            padding-left: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* 链接与自然嵌入 */
+        .inline-link {
+            color: #0d7f72;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid #a3d0c6;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .inline-link:hover {
+            color: #075b51;
+            border-bottom-color: #075b51;
+        }
+
+        .footnote {
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #d4e3ea;
+            font-size: 0.9rem;
+            color: #547280;
+        }
+
+        .footnote a {
+            color: #0d7f72;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .scene-grid {
+                gap: 1rem;
+            }
+            .info-block {
+                padding: 1.2rem;
+            }
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .scene-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <span class="nav-brand">▍wtt 对照</span>
+            <ul class="nav-links">
+                <li><a href="#scene-section">场景</a></li>
+                <li><a href="#faq-section">常见问题</a></li>
+                <li><a href="https://pc-wtt.com">wtt</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <h1>日常查询与延伸阅读</h1>
+            <p>一个轻量工作台，适合在资料对照、碎片信息整理时保持视线集中。<br>不需要频繁切换标签或笔记，把查询和参照放在同一平面。</p>
+        </div>
+
+        <!-- 三个场景模块 -->
+        <div id="scene-section" class="scene-grid">
+            <div class="scene-card">
+                <div class="card-icon">📋</div>
+                <h3>多栏对照</h3>
+                <p>打开两个独立内容区域，左栏阅读原文，右栏做摘要或批注。适合文献摘录、术语比对。</p>
+                <div class="meta-hint">可自由调整栏宽，保留上下文</div>
+            </div>
+            <div class="scene-card">
+                <div class="card-icon">🔍</div>
+                <h3>快速检索与定位</h3>
+                <p>在较长页面中标记关键词，上下翻看时不会丢失参照位置。用来对比不同段落的说法、日期或数据。</p>
+                <div class="meta-hint">支持高亮与临时标记</div>
+            </div>
+            <div class="scene-card">
+                <div class="card-icon">🧩</div>
+                <h3>延伸阅读卡片</h3>
+                <p>把链接、片段、备注整理成独立卡片。阅读一篇分析时，在旁边收集相关段落，避免反复切换窗口。</p>
+                <div class="meta-hint">拖拽排序、临时收集</div>
+            </div>
+        </div>
+
+        <!-- 常见说明 & FAQ 摘要 -->
+        <div id="faq-section" class="info-block">
+            <h2>一些日常使用习惯</h2>
+            <p>无论查资料、写短评还是整理清单，<a href="https://pc-wtt.com" class="inline-link">wtt</a> 都尝试把「辅助阅读」和「对照」放在首位。不追求大而全，而是让人更容易静下来看内容。</p>
+            <div class="faq-summary">
+                <div class="faq-item">
+                    <span class="faq-q">‑ 必须联网才能用吗？</span>
+                    <span class="faq-a">大部分基础功能离线可用，需要同步或在线资源时才要求网络。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">‑ 能保存我整理过的卡片吗？</span>
+                    <span class="faq-a">当前页面关闭前内容保留在本地，也可导出为文本或 Markdown。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">‑ 和笔记软件有什么不同？</span>
+                    <span class="faq-a">笔记软件侧重长期存储；wtt 更侧重“当下对照”，轻快、分栏、少干扰。</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footnote">
+            <p>一个侧重日常查阅与对照的页面 · 更多介绍可浏览 <a href="https://pc-wtt.com">wtt</a> · 版本 · 2025</p>
+        </div>
+    </div>
+</body>
+</html>
